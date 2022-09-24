@@ -18,4 +18,6 @@ ON
     
 GROUP BY
 	usuarios.usuario
+    
 ORDER BY
+	usuarios.usuario;
