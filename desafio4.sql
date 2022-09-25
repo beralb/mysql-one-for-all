@@ -1,17 +1,21 @@
 SELECT 
-	usuarios.usuario AS usuario,
-    IF(DATE(data_reproducao) >= '2021-01-01', 'Usuário ativo', 'Usuário inativo')
-    # data_reproducao,    
-    # 
+	DISTINCT(u.usuario) AS usuario,
+    COUNT(h.data_reproducao),
+	
+    CASE
+		WHEN h.data_reproducao > '2021-01-01' AND COUNT(h.data_reproducao = 0) THEN 'Usuário ativo'
+        WHEN h.data_reproducao > '2021-01-01' AND COUNT(h.data_reproducao = 0) THEN 'Usuário ativo'
+        ELSE 'Usuário inativo'
+	END AS status_usuario
 
-FROM SpotifyClone.usuarios
+FROM SpotifyClone.usuarios AS u
 
 INNER JOIN
-	SpotifyClone.historico_de_reproducoes
+	SpotifyClone.historico_de_reproducoes AS h
 
 ON 
-	usuarios.usuario_id = historico_de_reproducoes.usuarios_usuario_id
+	u.usuario_id = h.usuarios_usuario_id
 
 GROUP BY
-	usuarios.usuario,
-	historico_de_reproducoes.data_reproducao;
+	u.usuario,
+	h.data_reproducao;
