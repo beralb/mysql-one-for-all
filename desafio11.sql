@@ -1,5 +1,4 @@
 SELECT
-	c.cancao_id,
 	c.cancao AS nome_musica,
 
 	CASE
