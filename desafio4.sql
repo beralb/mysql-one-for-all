@@ -1,18 +1,11 @@
 SELECT 
-	DISTINCT(u.usuario) AS usuario,
-    COUNT(h.data_reproducao),
-	
-    CASE
-		WHEN h.data_reproducao > '2021-01-01' AND COUNT(h.data_reproducao = 0) THEN 'Usuário ativo'
-        WHEN h.data_reproducao > '2021-01-01' AND COUNT(h.data_reproducao = 0) THEN 'Usuário ativo'
-        ELSE 'Usuário inativo'
-	END AS status_usuario
-
-FROM SpotifyClone.usuarios AS u
-
-INNER JOIN
+	u.usuario AS usuario,
+    COUNT(h.data_reproducao)
+    
+FROM 
 	SpotifyClone.historico_de_reproducoes AS h
-
+INNER JOIN
+	SpotifyClone.usuarios AS u
 ON 
 	u.usuario_id = h.usuarios_usuario_id
 
