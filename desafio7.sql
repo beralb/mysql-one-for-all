@@ -18,5 +18,10 @@ GROUP BY
 	alb.album
     
 ORDER BY
-	seguidores DESC;
+	seguidores DESC,
+    art.artista,
+    alb.album;
+    
+    
+
 		
